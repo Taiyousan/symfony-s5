@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MovieRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,10 +30,10 @@ class Movie
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $releaseDate = null;
+    private ?DateTimeInterface $releaseDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $duration = null;
+    private ?int $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'movies')]
     private ?Category $category = null;

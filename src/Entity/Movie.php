@@ -30,7 +30,7 @@ class Movie
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    private ?DateTimeInterface $releaseDate = null;
+    private ?DateTime $releaseDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?int $duration = null;
@@ -99,12 +99,12 @@ class Movie
         return $this;
     }
 
-    public function getReleaseDate(): ?string
+    public function getReleaseDate(): ?DateTime
     {
         return $this->releaseDate;
     }
 
-    public function setReleaseDate(string $releaseDate): static
+    public function setReleaseDate(DateTime $releaseDate): static
     {
         $this->releaseDate = $releaseDate;
 

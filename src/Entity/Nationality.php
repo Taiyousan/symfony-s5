@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\NationalityRepository;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +18,7 @@ class Nationality
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['actor:read'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'nationality', targetEntity: Actor::class)]

@@ -46,7 +46,7 @@ class Movie
     private ?string $country = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'actor:read'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]

@@ -9,9 +9,29 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
+
+
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: [
+        'groups' => ['movie:read']
+    ],
+    operations: [
+        new Get(uriTemplate: '/movies/{id}'),
+        new Post(),
+        new Put(),
+        new Patch(),
+        new Delete(),
+    ]
+)]
 class Movie
 {
     #[ORM\Id]
@@ -26,21 +46,27 @@ class Movie
     private ?string $country = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['movie:read'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['movie:read'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['movie:read'])]
     private ?DateTime $releaseDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['movie:read'])]
     private ?int $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'movies')]
+    #[Groups(['movie:read'])]
     private ?Category $category = null;
 
     #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'movies')]
+    #[Groups(['movie:read'])]
     private Collection $actors;
 
     public function __construct()

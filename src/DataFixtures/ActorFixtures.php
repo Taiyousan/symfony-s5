@@ -5,9 +5,10 @@ namespace App\DataFixtures;
 use App\Entity\Actor;
 use App\Entity\Nationality;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class ActorFixtures extends Fixture
+class ActorFixtures extends Fixture implements DependentFixtureInterface
 {
 
 
@@ -21,7 +22,7 @@ class ActorFixtures extends Fixture
             $actor->setLastName($lastNames[$i - 1]);
             // we add four actors to each movie
             for ($j = 1; $j <= 10; $j++) {
-                $actor->setNationality($this->getReference('nationality_' . rand(1, 10)));
+                $actor->setNationality($this->getReference('nationality_' . rand(1, 9)));
             }
             $manager->persist($actor);
             $this->addReference('actor_' . $i, $actor);

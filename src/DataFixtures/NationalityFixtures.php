@@ -12,11 +12,11 @@ class NationalityFixtures extends Fixture
     {
         // tableau de 10 nationalités
         $nationalities = ['Français', 'Anglais', 'Espagnol', 'Italien', 'Japonais', 'Norvégien', 'Américain', 'Mexicain', 'Algérien', 'Marocain'];
-        foreach (range(1, 40) as $i) {
+        foreach (range(1, 10) as $i) {
             $nationality = new Nationality();
             $nationality->setName($nationalities[$i - 1]);
             $manager->persist($nationality);
-            $this->addReference('movie_' . $i, $nationality);
+            $this->addReference('nationality_' . $i, $nationality);
         }
 
         $manager->flush();

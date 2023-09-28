@@ -16,6 +16,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -51,6 +52,8 @@ class Movie
 
     #[ORM\Column(length: 255)]
     #[Groups(['movie:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 50, maxMessage: 'Describe your loot in 50 chars or less', minMessage: 'trop court')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]

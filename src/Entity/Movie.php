@@ -27,6 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     ],
     operations: [
         new Get(uriTemplate: '/movies/{id}'),
+        new GetCollection(),
         new Post(),
         new Put(),
         new Patch(),
@@ -47,7 +48,7 @@ class Movie
     private ?string $country = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['movie:read', 'actor:read'])]
+    #[Groups(['movie:read', 'actor:read', 'category:read'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]

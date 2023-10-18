@@ -18,6 +18,11 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    // #[Route(path: '/api/login_check', name: 'app_login_check', methods: ['POST'])]
+    // public function loginCheck(#[CurrentUser] $user = null): Response
+    // {
+    // }
+
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {

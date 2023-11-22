@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
 class MovieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

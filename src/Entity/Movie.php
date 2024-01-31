@@ -77,6 +77,9 @@ class Movie
     #[Groups(['movie:read'])]
     private Collection $actors;
 
+    #[ORM\ManyToOne(inversedBy: 'movies')]
+    private ?MediaObject $image = null;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
@@ -191,6 +194,18 @@ class Movie
     public function removeActor(Actor $actor): static
     {
         $this->actors->removeElement($actor);
+
+        return $this;
+    }
+
+    public function getImage(): ?MediaObject
+    {
+        return $this->image;
+    }
+
+    public function setImage(?MediaObject $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

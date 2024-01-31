@@ -10,6 +10,8 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
 use App\Controller\CreateMediaObjectAction;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -54,18 +56,57 @@ class MediaObject
     private ?int $id = null;
 
     #[ApiProperty(types: ['https://schema.org/contentUrl'])]
-    #[Groups(['media_object:read'])]
+    #[Groups(['media_object:read', 'movie:read'])]
     public ?string $contentUrl = null;
 
     #[Vich\UploadableField(mapping: 'media_object', fileNameProperty: 'filePath')]
     #[Assert\NotNull(groups: ['media_object_create'])]
     public ?File $file = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['movie:read'])]
     public ?string $filePath = null;
+
+    #[ORM\OneToMany(mappedBy: 'image', targetEntity: Movie::class)]
+    private Collection $movies;
+
+    public function __construct()
+    {
+        $this->movies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Collection<int, Movie>
+     */
+    public function getMovies(): Collection
+    {
+        return $this->movies;
+    }
+
+    public function addMovie(Movie $movie): static
+    {
+        if (!$this->movies->contains($movie)) {
+            $this->movies->add($movie);
+            $movie->setImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMovie(Movie $movie): static
+    {
+        if ($this->movies->removeElement($movie)) {
+            // set the owning side to null (unless already changed)
+            if ($movie->getImage() === $this) {
+                $movie->setImage(null);
+            }
+        }
+
+        return $this;
     }
 }

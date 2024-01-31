@@ -78,7 +78,9 @@ class Movie
     private Collection $actors;
 
     #[ORM\ManyToOne(inversedBy: 'movies')]
+    #[Groups(['movie:read'])]
     private ?MediaObject $image = null;
+
 
     public function __construct()
     {

@@ -23,12 +23,15 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['category:read'])]
+    #[Groups(['category:read', 'movie:read'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Movie::class)]
     #[Groups(['category:read'])]
     private Collection $movies;
+
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    private ?MediaObject $image = null;
 
     public function __construct()
     {
@@ -78,6 +81,18 @@ class Category
                 $movie->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?MediaObject
+    {
+        return $this->image;
+    }
+
+    public function setImage(?MediaObject $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

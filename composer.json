@@ -25,6 +25,7 @@
         "symfony/form": "6.3.*",
         "symfony/framework-bundle": "6.3.*",
         "symfony/http-client": "6.3.*",
+        "symfony/http-foundation": "6.3.*",
         "symfony/intl": "6.3.*",
         "symfony/mailer": "6.3.*",
         "symfony/mime": "6.3.*",
@@ -44,7 +45,8 @@
         "symfony/yaml": "6.3.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/intl-extra": "^3.7",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "vich/uploader-bundle": "^2.3"
     },
     "config": {
         "allow-plugins": {
@@ -97,7 +99,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.6",
         "squizlabs/php_codesniffer": "^3.7",
         "symfony/browser-kit": "6.3.*",
         "symfony/css-selector": "6.3.*",

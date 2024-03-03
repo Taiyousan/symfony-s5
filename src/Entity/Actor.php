@@ -12,8 +12,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ActorRepository::class)]
 #[ApiResource(
     normalizationContext: [
-        'groups' => ['actor:read']
-    ]
+        'groups' => ['actor:read'],
+    ],
+    paginationEnabled: false,
 )]
 
 class Actor
@@ -38,6 +39,9 @@ class Actor
     #[ORM\ManyToOne(inversedBy: 'actors')]
     #[Groups(['actor:read'])]
     private ?Nationality $nationality = null;
+
+    #[ORM\ManyToOne(inversedBy: 'actors')]
+    private ?MediaObject $image = null;
 
     public function __construct()
     {
@@ -108,6 +112,18 @@ class Actor
     public function setNationality(?Nationality $nationality): static
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    public function getImage(): ?MediaObject
+    {
+        return $this->image;
+    }
+
+    public function setImage(?MediaObject $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -41,7 +41,8 @@ class Movie
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'category:read', 'actor:read'])]
+    
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -57,7 +58,7 @@ class Movie
     #[ORM\Column(length: 255)]
     #[Groups(['movie:read'])]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 2, max: 50, maxMessage: 'Describe your loot in 50 chars or less', minMessage: 'trop court')]
+    #[Assert\Length(min: 1, max: 50, maxMessage: 'Describe your loot in 50 chars or less', minMessage: 'trop court')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
@@ -75,6 +76,11 @@ class Movie
     #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'movies')]
     #[Groups(['movie:read'])]
     private Collection $actors;
+
+    #[ORM\ManyToOne(inversedBy: 'movies')]
+    #[Groups(['movie:read'])]
+    private ?MediaObject $image = null;
+
 
     public function __construct()
     {
@@ -190,6 +196,18 @@ class Movie
     public function removeActor(Actor $actor): static
     {
         $this->actors->removeElement($actor);
+
+        return $this;
+    }
+
+    public function getImage(): ?MediaObject
+    {
+        return $this->image;
+    }
+
+    public function setImage(?MediaObject $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

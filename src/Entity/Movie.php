@@ -58,7 +58,7 @@ class Movie
     #[ORM\Column(length: 255)]
     #[Groups(['movie:read'])]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 1, max: 50, maxMessage: 'Describe your loot in 50 chars or less', minMessage: 'trop court')]
+    #[Assert\Length(min: 1, max: 500, maxMessage: 'Describe your loot in 50 chars or less', minMessage: 'trop court')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]

@@ -8,8 +8,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\GetCollection;
+
 
 #[ORM\Entity(repositoryClass: NationalityRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+    ],
+)]
 class Nationality
 {
     #[ORM\Id]

@@ -12,8 +12,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ActorRepository::class)]
 #[ApiResource(
     normalizationContext: [
-        'groups' => ['actor:read']
-    ]
+        'groups' => ['actor:read'],
+    ],
+    paginationEnabled: false,
 )]
 
 class Actor

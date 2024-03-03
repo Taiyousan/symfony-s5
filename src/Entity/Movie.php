@@ -55,7 +55,7 @@ class Movie
     #[Groups(['movie:read', 'actor:read', 'category:read'])]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 500)]
     #[Groups(['movie:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 1, max: 500, maxMessage: 'Describe your loot in 50 chars or less', minMessage: 'trop court')]
